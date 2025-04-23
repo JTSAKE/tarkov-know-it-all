@@ -6,20 +6,29 @@ TARKOV_API_URL = "https://api.tarkov.dev/graphql"
 
 CALIBER_ALIASES = {
 "5.45": "Caliber545x39",
-"5.56": "Caliber556x45NATO",
 "7.62x39": "Caliber762x39",
+"7.62x25": "Caliber762x25TT",
 "7.62x51": "Caliber762x51",
-"7.62x54r": "Caliber762x54R",
-"9x19": "Caliber9x19Para",
+"7.62x54": "Caliber762x54R",
 "9x18": "Caliber9x18PM",
+"9x19": "Caliber9x19Para",
+"9x21": "Caliber9x21",
+".45": "Caliber1143x23ACP",
+".357": "Caliber9x33R",
 "9x39": "Caliber9x39",
-"12x70": "Caliber12g",
-"20x70": "Caliber20g",
+"12g": "Caliber12g",
+"20g": "Caliber20g",
+"12.7x55": "Caliber127x55",
 "4.6x30": "Caliber46x30",
 "5.7x28": "Caliber57x28",
+"6.8x51": "Caliber68x51",
 "366": "Caliber366TKM",
-"300blk": "Caliber300BLK",
+"300blk": "Caliber762x35",
 "23x75": "Caliber23x75",
+"338 Lapua": "Caliber86x70",
+".50 AE": "Caliber127x33",
+"40mmUS": "Caliber40x46",
+"40mmRU": "Caliber40mmRU",
 }
 
 class Ammo(commands.Cog):
@@ -58,9 +67,9 @@ class Ammo(commands.Cog):
         """
         # DEBUG: Show user input and dictionary result
         normalized_input = caliber.strip().lower().replace(" ", "")
-        print(f"[DEBUG] Normalized input: {normalized_input}")
+        print(f"[DEBUG] User input: {normalized_input}")
 
-        # Try to resolve the alias
+        # DEBUG: Try to resolve user input to dictionary result
         api_caliber = CALIBER_ALIASES.get(normalized_input)
         print(f"[DEBUG] Alias lookup result: {api_caliber}")
 
@@ -101,7 +110,7 @@ class Ammo(commands.Cog):
         for ammo in sorted_ammo:
             p = ammo["properties"]
             message_lines.append(
-                f"**{ammo['name']}** – Pen: {p['penetrationPower']}, Dmg: {p['damage']}, Frag: {int(p['fragmentationChance'] * 100)}%"
+                f"**{ammo['name']}** - Pen: {p['penetrationPower']}, Dmg: {p['damage']}, Frag: {int(p['fragmentationChance'] * 100)}%"
             )
 
         # Discord message limit = 2000 chars, truncate if needed
