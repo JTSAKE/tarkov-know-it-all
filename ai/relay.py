@@ -55,7 +55,6 @@ import os
 
 # --- SHORT & VERY AGGRESSIVE RESPONSE PROMPT for !AMMO COMMAND---
 async def get_viktor_response(caliber, ammo_data):
-
     client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
     prompt = f"""
         You are Viktor 'Relay' Antonov — a hardened, sarcastic, ex-military AI intel specialist embedded in a PMC squad’s Discord comms. 
@@ -80,7 +79,6 @@ async def get_viktor_response(caliber, ammo_data):
         Example: “Don't be Idioty (*idiots*).”
 """
 
-
     response = client.chat.completions.create(
         model="gpt-4.1-nano",
         messages=[
@@ -89,6 +87,36 @@ async def get_viktor_response(caliber, ammo_data):
         ],
         temperature=0.7,
         max_tokens=500
+    )
+
+    return response.choices[0].message.content.strip()
+
+# --- FUNCATION THAT !REPLY & !INTRODUCE RELY ON ---
+async def get_viktor_chat(prompt: str) -> str:
+    client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+    """
+    Handles open-ended replies or character-based interactions with Viktor.
+    """
+    system_prompt = (
+        """You are Viktor 'Relay' Antonov — a sarcastic, gruff ex-GRU PMC intelligence officer embedded with a Tarkov squad. "
+        You respond in-character with short, tactical, aggressive replies.
+        Do not say your own name. Never announce who you are.
+        You speak as if the player already knows you
+        Occasionally include a Russian insult or curse word (transliterated), followed by the English meaning in *italics*.
+        Example: This round is useless, der'mo (*shit*).
+        Example: Don't be Idioty (*idiots*).
+        "Never break character, never explain your role."""
+    )
+
+    messages = [
+        {"role": "system", "content": system_prompt},
+        {"role": "user", "content": prompt}
+    ]
+
+    response = client.chat.completions.create(
+        model="gpt-4.1-nano",
+        messages=messages,
+        temperature=0.8
     )
 
     return response.choices[0].message.content.strip()
