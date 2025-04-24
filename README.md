@@ -1,63 +1,96 @@
-# Tarkov Squad Intel Bot
+# Tarkov Know-It-All Bot — "Viktor 'Relay' Antonov"
 
-**A utility-focused Discord bot for Escape from Tarkov squads.**  
-This bot provides real-time in-raid support including ammo performance data, item pricing, and planned map intel. Built in Python using `discord.py`, it's designed to serve squads with fast, reliable game information via Discord commands.
-
----
-
-## Current Features
-
-- `!ping` — Basic connectivity check (bot framework setup)
-- `!ammo [caliber]` — Returns ammo options for a given caliber, sorted by penetration power  
-  - Accepts user-friendly inputs like `5.45x39`, `9x19`, `7.62x39`
-  - Data pulled live from [tarkov.dev](https://tarkov.dev)
-- `!calibers` — Lists all supported calibers (based on internal alias mapping)
+A Discord bot built for Escape From Tarkov players. Viktor is more than a bot — he's your squad's embedded PMC intel specialist. Tactical, sarcastic, and occasionally offensive (in Russian, with translations). This project combines real-time game data with OpenAI to deliver immersive, role-play-driven squad support.
 
 ---
 
-## Project Status
+## 🧰 Current Features
 
-- **Stage**: Core Bot Framework
-- **Completed Setup**:
-  - Discord bot application and permissions
-  - Modular command structure using cogs
-  - Working command system with live API integration
-- **In Progress**:
-  - Error handling and logging
-- **Next Planned Features**:
-  - `!price [item]` — Real-time flea market pricing
-  - `!extracts [map]` — Map-specific extract info
-  - `!boss [map]` — Boss spawn chance and behavior lookup
+### ✅ Core Framework
+- Modular command structure using Discord.py cogs
+- Error handling & logging
+- Custom `!help` command (in-character)
+- Dev mode heartbeat + debug toggles
+- `.env` support and secure API key loading
 
 ---
 
-## Tech Stack
+### 🔫 `!ammo <caliber>`
+Fetches real-time ammo data from the [Tarkov.dev](https://tarkov.dev) API and sends it through OpenAI's GPT model.
 
-- Python 3.12+
-- `discord.py` (v2+, async)
-- `requests` for API calls
-- GraphQL integration with [tarkov.dev](https://tarkov.dev/graphql)
-- Modular command system using cogs
-
----
-
-## Setup (Local Dev)
-
-1. Clone the repo
-2. Create a `.env` file with your bot token:
-   ```env
-   DISCORD_TOKEN=your_token_here
+- Returns top-performing ammo by penetration
+- Supports fuzzy aliases (e.g., `!ammo 9x19`)
+- Viktor gives a tactical, sarcastic ammo briefing
+- GPT-driven personality in full effect
 
 ---
 
-## Install Dependencies
-pip install -r requirements.txt
+### 🎯 `!calibers`
+- Returns a list of supported ammo calibers
+- Response is in-character from Viktor
+- Delivered with attitude and a jab or two for even asking
 
+---
+
+### 💰 `!price <item name>`
+Fetches flea market and trader prices for any item.
+
+- Uses fuzzy matching (`gpu` → `Graphics Card`)
+- Live pricing from Tarkov.dev (24h average, low, trader offers)
+- GPT formats the data into a short, snarky market analysis
+- Viktor tells you if it's “worth dying for” or “trader trash”
 
 ---
 
-## Run Bot
-python bot.py
+## 🧠 Viktor: The Personality
 
+Viktor "Relay" Antonov is a grizzled, ex-military AI advisor.
+
+- Built using OpenAI’s `gpt-4`
+- Responses shaped by system and user prompt engineering
+- Drops occasional Russian insults (with *English translations*)
+- Never breaks character. Ever.
 
 ---
+
+## 🚀 Planned Features
+
+- `!boss <map>`: Location intel, spawn chances, Viktor commentary
+- `!extracts <map>`: Accessible extract info
+- `!price <multi-item>`: Batch price queries
+- `!quest <name>`: Briefings and progression tracking
+- Viktor mood modes (`!viktormode chill`, `!viktormode brutal`)
+- Cooldown system + GPT query caching
+
+---
+
+## 🛠️ Stack
+
+- Python 3.10+
+- Discord.py
+- Requests
+- OpenAI SDK (v1+)
+- Tarkov.dev GraphQL API
+- dotenv
+
+---
+
+## 👥 For the Squad (Eventually)
+Currently built for internal squad use, but may be open-sourced in the future. Designed to scale from utility bot → immersive squadmate → full PMC toolkit.
+
+---
+
+## 📁 Project Structure
+
+```bash
+.
+├── bot.py                # Entry point
+├── .env                  # API keys and dev flags
+├── cogs/
+│   ├── ammo.py           # !ammo and !calibers
+│   ├── price.py          # !price intel
+│   └── help.py           # Custom help command
+├── ai/
+│   └── relay.py          # GPT integration and prompt engineering
+├── logs/
+│   └── bot.log           # Logging output
