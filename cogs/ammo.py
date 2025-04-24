@@ -1,34 +1,39 @@
 import requests
 from discord.ext import commands
+import logging
+import os
+import re
+
+DEBUG_MODE = os.getenv("DEBUG_MODE", "false").lower() == "true"
+logger = logging.getLogger(__name__)
 
 TARKOV_API_URL = "https://api.tarkov.dev/graphql"
 
-
 CALIBER_ALIASES = {
-"5.45": "Caliber545x39",
-"7.62x39": "Caliber762x39",
-"7.62x25": "Caliber762x25TT",
-"7.62x51": "Caliber762x51",
-"7.62x54": "Caliber762x54R",
-"9x18": "Caliber9x18PM",
-"9x19": "Caliber9x19Para",
-"9x21": "Caliber9x21",
-".45": "Caliber1143x23ACP",
-".357": "Caliber9x33R",
-"9x39": "Caliber9x39",
-"12g": "Caliber12g",
-"20g": "Caliber20g",
-"12.7x55": "Caliber127x55",
-"4.6x30": "Caliber46x30",
-"5.7x28": "Caliber57x28",
-"6.8x51": "Caliber68x51",
-"366": "Caliber366TKM",
-"300blk": "Caliber762x35",
-"23x75": "Caliber23x75",
-"338 Lapua": "Caliber86x70",
-".50 AE": "Caliber127x33",
-"40mmUS": "Caliber40x46",
-"40mmRU": "Caliber40mmRU",
+    "545": "Caliber545x39",
+    "762x39": "Caliber762x39",
+    "762x25": "Caliber762x25TT",
+    "762x51": "Caliber762x51",
+    "762x54": "Caliber762x54R",
+    "9x18": "Caliber9x18PM",
+    "9x19": "Caliber9x19Para",
+    "9x21": "Caliber9x21",
+    "45": "Caliber1143x23ACP",
+    "357": "Caliber9x33R",
+    "9x39": "Caliber9x39",
+    "12g": "Caliber12g",
+    "20g": "Caliber20g",
+    "127x55": "Caliber127x55",
+    "46x30": "Caliber46x30",
+    "57x28": "Caliber57x28",
+    "68x51": "Caliber68x51",
+    "366": "Caliber366TKM",
+    "300blk": "Caliber762x35",
+    "23x75": "Caliber23x75",
+    "338lapua": "Caliber86x70",
+    "50ae": "Caliber127x33",
+    "40mmus": "Caliber40x46",
+    "40mmru": "Caliber40mmRU",
 }
 
 class Ammo(commands.Cog):
@@ -65,13 +70,6 @@ class Ammo(commands.Cog):
             }
         }
         """
-        # DEBUG: Show user input and dictionary result
-        normalized_input = caliber.strip().lower().replace(" ", "")
-        print(f"[DEBUG] User input: {normalized_input}")
-
-        # DEBUG: Try to resolve user input to dictionary result
-        api_caliber = CALIBER_ALIASES.get(normalized_input)
-        print(f"[DEBUG] Alias lookup result: {api_caliber}")
 
         # Send the POST request
         response = requests.post(TARKOV_API_URL, json={"query": query})
@@ -82,10 +80,22 @@ class Ammo(commands.Cog):
         data = response.json().get("data", {}).get("items", [])
 
         # Normalize the input
-        normalized_input = caliber.strip().lower().replace(" ", "")
+        normalized_input = re.sub(r'[^a-z0-9]', '', caliber.strip().lower())
 
         # Try to find a mapped caliber
         api_caliber = CALIBER_ALIASES.get(normalized_input)
+
+        #Debug printing user input and alias lookup from caliber dictionary
+        if DEBUG_MODE:
+            logger.debug("User input: %s", normalized_input)
+            logger.debug("Alias lookup result: %s", api_caliber)
+
+        api_caliber = CALIBER_ALIASES.get(normalized_input)
+        if not api_caliber:
+            if DEBUG_MODE:
+                logger.warning("Input '%s' could not be matched to any known caliber.", normalized_input)
+            await ctx.send("Unknown caliber. Try `!calibers` to see what's available.")
+            return
 
         # If not in aliases, assume it's a raw Tarkov-style string
         if not api_caliber:
