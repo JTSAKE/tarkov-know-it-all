@@ -116,3 +116,6 @@
 [2025-04-23 19:46:30,096] [INFO] logging in using static token
 [2025-04-23 19:46:31,211] [INFO] Shard ID None has connected to Gateway (Session ID: e39fb98bfabd0d46b4d200e8a5566220).
 [2025-04-23 19:46:40,053] [INFO] HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+[2025-04-23 20:05:47,950] [WARNING] PyNaCl is not installed, voice will NOT be supported
+[2025-04-23 20:05:48,940] [INFO] logging in using static token
+[2025-04-23 20:05:50,126] [INFO] Shard ID None has connected to Gateway (Session ID: f041dcc3ae4daa94abfd2bba0c654307).

@@ -29,13 +29,14 @@ bot = commands.Bot(command_prefix='!', intents=intents)
 
 @bot.event
 async def on_ready():
-    print(f"✅ Logged in as {bot.user}!")
+    print(f"Logged in as {bot.user}!")
 
 async def main():
     await bot.load_extension("cogs.core")
     await bot.load_extension("cogs.ammo")
     await bot.load_extension("cogs.errors")
     await bot.load_extension("cogs.help")
+    await bot.load_extension("cogs.price")
     await bot.start(TOKEN)
 
 @bot.event
