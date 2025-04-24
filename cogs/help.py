@@ -15,6 +15,9 @@ class CustomHelp(commands.Cog):
             "`!ping` — Check if the bot is online.\n"
             "`!ammo [caliber]` — Get a list of ammo for a given caliber.\n"
             "`!calibers` — View all supported caliber inputs.\n"
+            "`!price [item name]` — View item price on flea market and from traders.\n"
+            "`!reply [message]` — Chat directly with Viktor and get a personalized response.\n"
+            "`!introduce` — Have Viktor introduce himself and share his backstory.\n"
             "`!help` — Display this help message.\n"
         )
         await ctx.send(message)
