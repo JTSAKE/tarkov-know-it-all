@@ -3,6 +3,7 @@ from discord.ext import commands
 import requests
 import difflib
 import os
+from ai.relay import get_price_commentary
 
 TARKOV_API_URL = "https://api.tarkov.dev/graphql"
 DEBUG_MODE = os.getenv("DEBUG_MODE", "false").lower() == "true"
@@ -47,22 +48,27 @@ class Price(commands.Cog):
             await ctx.send("Couldn’t find a matching item. Try being less bad.")
             return
 
-        # Build a response string (no Viktor yet)
+        #Passing Match to Viktor
         name = match["name"]
-        avg_price = match.get("avg24hPrice", "N/A")
-        low_price = match.get("lastLowPrice", "N/A")
+        avg_price = match.get("avg24hPrice", 0)
+        low_price = match.get("lastLowPrice", 0)
 
-        trader_prices = [
-            f"{offer['source']}: {offer['price']}₽"
-            for offer in match.get("sellFor", [])
-        ]
+        trader_prices = match.get("sellFor", [])
+        trader_summary = "\n".join([f"{t['source']}: {t['price']}₽" for t in trader_prices])
 
-        response_text = f"**{name}**\n" \
-                        f"- 24h Avg: {avg_price:,}₽\n" \
-                        f"- Last Low: {low_price:,}₽\n" \
-                        f"- Traders: {', '.join(trader_prices)}"
+        # Build summary for GPT
+        summary = f"""
+        Item: {name}
+        24h Average Price: {avg_price:,}₽
+        Last Known Flea Price: {low_price:,}₽
+        Trader Sell Offers:
+        {trader_summary}
+        """
 
-        await ctx.send(response_text)
+        # Pass to Viktor
+        viktor_response = await get_price_commentary(name, summary)
+
+        await ctx.send(viktor_response)
 
     def find_best_item_match(self, query, items):
         query = query.strip().lower()
@@ -78,6 +84,7 @@ class Price(commands.Cog):
                 if item["name"].lower() == best or item["shortName"].lower() == best:
                     return item
         return None
+
 
 async def setup(bot):
     await bot.add_cog(Price(bot))
