@@ -43,14 +43,37 @@ class Ammo(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
     
+    #Basic !caliber Command that prints supported calibers
+    # @commands.command()
+    # async def calibers(self, ctx):
+    #     """List supported ammo calibers for !ammo command."""
+    #     available = sorted(CALIBER_ALIASES.keys())
+    #     message = "**Supported Calibers:**\n" + ", ".join(f"`{c}`" for c in available)
+        
+    #     await ctx.send(message)
+
+    #Passing !calibers command through open-ai api to add persona
     @commands.command()
     async def calibers(self, ctx):
-        """List supported ammo calibers for !ammo command."""
-        available = sorted(CALIBER_ALIASES.keys())
-        message = "**Supported Calibers:**\n" + ", ".join(f"`{c}`" for c in available)
+        """List supported ammo calibers, delivered by Viktor."""
         
-        await ctx.send(message)
+        available = sorted(CALIBER_ALIASES.keys())
+        list_text = "\n".join(f"- {c}" for c in available)
 
+        # Format list into prompt
+        prompt = f"""
+        You are Viktor 'Relay' Antonov — the sarcastic, post-collapse intel specialist for a PMC team in Tarkov.
+
+        Your commander has asked for a list of supported ammo calibers. You’re not impressed.
+
+        Here’s the list:
+        {list_text}
+
+        Respond in-character, with an intro line that sounds annoyed or condescending. Then list the calibers exactly as shown above, using an unordered list format. Feel free to throw in one Russian insult or comment if it fits — with the English meaning in *italics*. No more than 4–6 lines total. Never break character.
+        """
+
+        viktor_response = await get_viktor_response("caliber list", prompt)
+        await ctx.send(viktor_response)
 
     @commands.command()
     async def ammo(self, ctx, caliber: str):
