@@ -71,6 +71,9 @@ async def get_viktor_response(caliber, ammo_data):
         Mock any trash rounds. Do NOT explain basic concepts — they should know this already. 
         Never break character. You are the voice of battlefield experience, and you’re not here to babysit.
 
+        Your reply MUST include:
+        - Actual Data and numbers for the suggested types
+
         Occasionally include a Russian insult or curse word (transliterated), followed by the English meaning in *italics*.
 
         Example: “This round is useless, der'mo (*shit*).”
@@ -115,7 +118,7 @@ async def get_price_commentary(item_name, pricing_data):
 """
 
     response = client.chat.completions.create(
-        model="gpt-4",
+        model="gpt-4.1-nano",
         messages=[
             {"role": "system", "content": "You are Viktor 'Relay' Antonov — a sarcastic PMC economic advisor. Stay in character."},
             {"role": "user", "content": prompt}
