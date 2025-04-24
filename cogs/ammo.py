@@ -1,8 +1,10 @@
 import requests
 from discord.ext import commands
 import logging
+import time
 import os
 import re
+from ai.relay import get_viktor_response
 
 DEBUG_MODE = os.getenv("DEBUG_MODE", "false").lower() == "true"
 logger = logging.getLogger(__name__)
@@ -11,6 +13,7 @@ TARKOV_API_URL = "https://api.tarkov.dev/graphql"
 
 CALIBER_ALIASES = {
     "545": "Caliber545x39",
+    "556": "Caliber556x45NATO",
     "762x39": "Caliber762x39",
     "762x25": "Caliber762x25TT",
     "762x51": "Caliber762x51",
@@ -97,10 +100,6 @@ class Ammo(commands.Cog):
             await ctx.send("Unknown caliber. Try `!calibers` to see what's available.")
             return
 
-        # If not in aliases, assume it's a raw Tarkov-style string
-        if not api_caliber:
-            api_caliber = caliber.strip()  # use as-is
-
         # Filter by caliber
         filtered_ammo = [
             item for item in data
@@ -123,9 +122,26 @@ class Ammo(commands.Cog):
                 f"**{ammo['name']}** - Pen: {p['penetrationPower']}, Dmg: {p['damage']}, Frag: {int(p['fragmentationChance'] * 100)}%"
             )
 
-        # Discord message limit = 2000 chars, truncate if needed
-        response_message = "\n".join(message_lines)[:1990]
-        await ctx.send(response_message)
+        # Format ammo into a readable string for the LLM
+        ammo_summary = "\n".join([
+            f"{a['name']}: Pen={a['properties'].get('penetrationPower', '?')}, Dmg={a['properties'].get('damage', '?')}"
+            for a in sorted_ammo
+            if a.get("properties") and a["properties"].get("penetrationPower") is not None
+        ])
+
+        # Get GPT response
+        viktor_response = await get_viktor_response(caliber, ammo_summary)
+        await ctx.send(viktor_response)
+
+        # # Discord message limit = 2000 chars, truncate if needed
+        # if DEBUG_MODE:
+        #     response_message = "\n".join(message_lines)[:1990]
+        #     await ctx.send(response_message)
+
+        start_time = time.perf_counter()
+        viktor_response = await get_viktor_response(caliber, ammo_summary)
+        latency = time.perf_counter() - start_time
+        logger.info("GPT ammo response took %.2f seconds", latency)
 
 async def setup(bot):
     await bot.add_cog(Ammo(bot))
