@@ -170,3 +170,9 @@
 [2025-04-23 20:49:45,113] [WARNING] PyNaCl is not installed, voice will NOT be supported
 [2025-04-23 20:49:46,087] [INFO] logging in using static token
 [2025-04-23 20:49:47,242] [INFO] Shard ID None has connected to Gateway (Session ID: be14b2712dca81c47eafa2e188a1ce5b).
+[2025-04-24 15:09:19,974] [WARNING] PyNaCl is not installed, voice will NOT be supported
+[2025-04-24 15:29:55,614] [WARNING] PyNaCl is not installed, voice will NOT be supported
+[2025-04-24 15:33:55,794] [WARNING] PyNaCl is not installed, voice will NOT be supported
+[2025-04-24 15:34:34,897] [WARNING] PyNaCl is not installed, voice will NOT be supported
+[2025-04-24 15:34:36,107] [INFO] logging in using static token
+[2025-04-24 15:34:37,265] [INFO] Shard ID None has connected to Gateway (Session ID: c8002726dbd0351c9a2b539c5924749b).
