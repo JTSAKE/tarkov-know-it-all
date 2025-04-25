@@ -291,3 +291,23 @@
 [2025-04-24 21:42:42,870] [INFO] logging in using static token
 [2025-04-24 21:42:43,816] [INFO] Shard ID None has connected to Gateway (Session ID: 412b9a0435b526ab7516488f38bac559).
 [2025-04-24 21:42:54,397] [INFO] HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+[2025-04-25 11:49:05,332] [WARNING] PyNaCl is not installed, voice will NOT be supported
+[2025-04-25 11:49:28,239] [INFO] logging in using static token
+[2025-04-25 11:49:29,365] [INFO] Shard ID None has connected to Gateway (Session ID: 41b0f925b4f640c7e467f9aefcb8c84c).
+[2025-04-25 13:06:19,432] [WARNING] PyNaCl is not installed, voice will NOT be supported
+[2025-04-25 13:06:40,430] [INFO] logging in using static token
+[2025-04-25 13:06:41,482] [INFO] Shard ID None has connected to Gateway (Session ID: a8b0c69cb2f624d128ff90b9dad1fdc0).
+[2025-04-25 13:07:05,812] [INFO] HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+[2025-04-25 13:08:44,641] [INFO] HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+[2025-04-25 13:08:46,292] [INFO] HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+[2025-04-25 13:08:46,294] [INFO] GPT ammo response took 1.04 seconds
+[2025-04-25 13:09:54,361] [INFO] HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+[2025-04-25 13:13:25,294] [INFO] HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+[2025-04-25 13:13:57,922] [INFO] HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+[2025-04-25 13:21:15,217] [WARNING] PyNaCl is not installed, voice will NOT be supported
+[2025-04-25 13:21:35,826] [INFO] logging in using static token
+[2025-04-25 13:21:36,906] [INFO] Shard ID None has connected to Gateway (Session ID: 307f7beb004ad484f85da5343ba74fe4).
+[2025-04-25 13:22:12,500] [INFO] HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+[2025-04-25 13:22:16,438] [INFO] HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+[2025-04-25 13:22:16,438] [INFO] GPT ammo response took 3.69 seconds
+[2025-04-25 13:24:00,603] [INFO] HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"

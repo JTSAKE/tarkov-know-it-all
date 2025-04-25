@@ -76,7 +76,7 @@ Intel report on any boss in Tarkov, delivered by Viktor.
 
 Viktor "Relay" Antonov is a grizzled, ex-military AI advisor.
 
-- Built using OpenAI’s `gpt-4`
+- Built using OpenAI’s `gpt-4.1-nano`
 - Responses shaped by system and user prompt engineering
 - Drops occasional Russian insults (with *English translations*)
 - Never breaks character. Ever.
