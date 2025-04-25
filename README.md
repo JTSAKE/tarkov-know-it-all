@@ -42,7 +42,7 @@ Fetches flea market and trader prices for any item.
 
 ---
 
-### 🛠️ !build <module name>
+### 🛠️ `!build <module name>`
 Returns all requirements to build or upgrade a hideout module.
 Fuzzy-matches hideout station names (bitcoin, medstation, water, etc.)
 Shows item counts, skill levels, and prerequisite modules for each level
@@ -51,7 +51,7 @@ Future-ready for Viktor to critique your base-building priorities
 
 ---
 
-### 🧱 !buildlvl <module name>
+### 🧱 `!buildlvl <module name>`
 Lists all upgrade levels available for a given hideout module.
 Fuzzy-matches hideout station names (lavatory, intel, med, etc.)
 Displays available levels in a clean list (e.g., Lv1, Lv2, Lv3)
