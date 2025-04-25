@@ -1,0 +1,225 @@
+{
+    "Cultist Priest": {
+        "name": "Cultist Priest",
+        "map": "Customs, Woods, Shoreline, Night Factory, Ground Zero 21+",
+        "spawn_chance": "Customs(20%), Woods(20%), Shoreline(2%), Night Factory(2%), Ground Zero 21+(2%)",
+        "health": "850 HP",
+        "tactics": "Moves in stealthy 3–5 man groups, often hiding in the woods or shadows. The Priest uses a poisoned Cultist knife and silently flanks targets. Cultists approach without sound and attempt melee kills. If threatened, they engage with firearms and grenades, then often retreat into cover to reset.",
+        "guard_count": "3-4",
+        "top_loot": [
+            "RB-BK Marked Key",
+            "RB-VO Marked Key",
+            "TerraGroup Storage Room Keycard (Yellow)",
+            "Kiba Arms Outer Door Key",
+            "TerraGroup Labs Keycard (Red)"
+        ]
+    },
+    "Glukhar": {
+        "name": "Glukhar",
+        "map": "Reserve",
+        "spawn_chance": "39%",
+        "health": "1010 HP",
+        "tactics": "Highly aggressive and coordinated. Glukhar sticks close to his guards, who follow him wherever he moves. They excel in mid-range fights and are extremely accurate. Avoid engaging in open areas — narrow corridors and enclosed spaces are your best chance at survival.",
+        "guard_count": "6",
+        "top_loot": [
+            "RB-BK Marked Key",
+            "RB-VO Marked Key",
+            "Kiba Arms Outer Door Key",
+            "TerraGroup Labs Keycard (Red)",
+            "Dorm Room 314 Marked Key"
+        ]
+    },
+    "Kaban": {
+        "name": "Kaban",
+        "map": "Street of Tarkov",
+        "spawn_chance": "39%",
+        "health": "1300 HP",
+        "tactics": "Stationary powerhouse. Kaban uses mounted machine guns without rest and moves slowly between fortified positions. He’s surrounded by disciplined, ex-military guards and supported by nearby Scavs. His stronghold at the car repair shop is reinforced with AGS turrets, stationary MGs, landmines, and rooftop snipers. He wears hidden armor and commands absolute loyalty from his squad.",
+        "guard_count": "9",
+        "top_loot": [
+            "RB-BK Marked Key",
+            "RB-VO Marked Key",
+            "Kiba Arms Outer Door Key",
+            "TerraGroup Labs Keycard (Red)",
+            "Dorm Room 314 Marked Key"
+        ]
+    },
+    "Killa": {
+        "name": "Killa",
+        "map": "Interchange",
+        "spawn_chance": "35%",
+        "health": "890 HP",
+        "tactics": "Solo boss, highly aggressive, rushes players with grenades and full-auto fire. Roams the mall interior.",
+        "guard_count": "0",
+        "top_loot": [
+            "RB-BK Marked Key",
+            "RB-VO Marked Key",
+            "Kiba Arms Outer Door Key",
+            "TerraGroup Labs Keycard (Red)",
+            "Dorm Room 314 Marked Key"
+        ]
+    },
+    "Knight": {
+        "name": "Knight",
+        "map": "Customs, Woods, Lighthouse, Shoreline",
+        "spawn_chance": "Customs(39%), Woods(39%), Lighthouse(39%), Shoreline(39%)",
+        "health": "1120 HP",
+        "tactics": "Knight leads the goons with speed and aggression. He’s a frontliner who rushes targets, flanks aggressively, and sets the tempo for his squad. While his guards provide cover and suppressing fire, Knight pushes hard and fast — expect coordinated pressure and minimal downtime between engagements.",
+        "guard_count": "2",
+        "top_loot": [
+            "RB-BK Marked Key",
+            "RB-VO Marked Key",
+            "Kiba Arms Outer Door Key",
+            "TerraGroup Labs Keycard (Red)",
+            "Dorm Room 314 Marked Key"
+        ]
+    },
+    "Birdeye": {
+        "name": "Birdeye",
+        "map": "Customs, Woods, Lighthouse, Shoreline",
+        "spawn_chance": "Customs(39%), Woods(39%), Lighthouse(39%), Shoreline(39%)",
+        "health": "795 HP",
+        "tactics": "Lethal and elusive. Birdeye favors covert sniping and hit-and-run tactics, engaging targets from a distance with suppressed fire. He’s rarely seen before he strikes and often repositions after firing. Prefers elevation and concealment, acting as the overwatch for Knight and Big Pipe during coordinated assaults.",
+        "guard_count": "0",
+        "top_loot": [
+            "RB-BK Marked Key",
+            "RB-VO Marked Key",
+            "Kiba Arms Outer Door Key",
+            "TerraGroup Labs Keycard (Red)",
+            "Dorm Room 314 Marked Key"
+        ]
+    },
+    "Big Pipe": {
+        "name": "Big Pipe",
+        "map": "Customs, Woods, Lighthouse, Shoreline",
+        "spawn_chance": "Customs(39%), Woods(39%), Lighthouse(39%), Shoreline(39%)",
+        "health": "910 HP",
+        "tactics": "Brutal and explosive. Big Pipe charges into fights with heavy armor and an automatic grenade launcher, clearing rooms and suppressing entire squads. He thrives in close to mid-range engagements, using sheer firepower to break defensive lines while Knight and Birdeye coordinate flanks and overwatch.",
+        "guard_count": "0",
+        "top_loot": [
+            "RB-BK Marked Key",
+            "RB-VO Marked Key",
+            "Kiba Arms Outer Door Key",
+            "TerraGroup Labs Keycard (Red)",
+            "Dorm Room 314 Marked Key"
+        ]
+    },
+    "Kollontay": {
+        "name": "Kollontay",
+        "map": "Street of Tarkov",
+        "spawn_chance": "39%",
+        "health": "1055 HP",
+        "tactics": "Territorial and controlled. Kollontay typically holds a static position with short patrol routes. He’s calculated — if confident in a fight, he may switch to his police baton for close quarters. Operates around Klimov Shopping Mall and the Tarkov Academy, maintaining order with a small, disciplined guard team.",
+        "guard_count": "3-4",
+        "top_loot": [
+            "Kalashnikov AKMN 7.62x39 Assult Rifle",
+            "Kalashnikov AKS-74U 5.45x39Assult Rifle",
+            "RSP-30 reactive signal cartridge (Firework)",
+            "Degtyarev RPDN 7.62x39 machine gun",
+            "TOZ KS-23M 23x75mm pump-action shotgun"
+        ]
+    },
+    "Partisan": {
+        "name": "Partisan",
+        "map": "Customs, Woods, Lighthouse, Shoreline",
+        "spawn_chance": "Customs(30%), Woods(30%), Lighthouse(30%), Shoreline(30%)",
+        "health": "950 HP",
+        "tactics": "A master of asymmetrical warfare. Partisan relies on mines, traps, and ambushes to eliminate enemies before they even know they’re being hunted. He uses terrain—urban or forested—to set lethal chokepoints and punishes overconfidence. Rarely seen until it’s too late, he prefers indirect combat and psychological pressure over direct engagements.",
+        "guard_count": "0",
+        "top_loot": [
+            "RB-BK Marked Key",
+            "RB-VO Marked Key",
+            "Kiba Arms Outer Door Key",
+            "Red Rebel Ice Pick",
+            "TerraGroup Labs Keycard (Red)"
+        ]
+    },
+    "Reshala": {
+        "name": "Reshala",
+        "map": "Customs",
+        "spawn_chance": "39%",
+        "health": "752 HP",
+        "tactics": "Passive and protected. Reshala avoids direct combat, often staying behind cover or out of sight while his guards do the fighting. He never wears armor, relying entirely on his well-armed entourage. Hostile to low-karma player Scavs — his guards may warn, but will engage without hesitation if provoked or approached too closely.",
+        "guard_count": "4",
+        "top_loot": [
+            "RB-BK Marked Key",
+            "RB-VO Marked Key",
+            "Kiba Arms Outer Door Key",
+            "TerraGroup Labs Keycard (Red)",
+            "Dorm Room 314 Marked Key"
+        ]
+    },
+    "Sanitar": {
+        "name": "Sanitar",
+        "map": "Shoreline",
+        "spawn_chance": "39%",
+        "health": "1270 HP",
+        "tactics": "Supports and sustains. Sanitar fights alongside his guards but frequently disengages to heal or use combat stimulants. He carries an extensive supply of meds, making prolonged fights difficult. Expect bursts of aggression followed by tactical retreats to reset and recover.",
+        "guard_count": "3",
+        "top_loot": [
+            "RB-BK Marked Key",
+            "RB-VO Marked Key",
+            "Kiba Arms Outer Door Key",
+            "TerraGroup Labs Keycard (Red)",
+            "Dorm Room 314 Marked Key"
+        ]
+    },
+    "Shadow of Tagilla": {
+        "name": "Shadow of Tagilla",
+        "map": "The Labyrinth",
+        "spawn_chance": "40%",
+        "health": "1305 HP",
+        "tactics": "Unknown",
+        "guard_count": "0",
+        "top_loot": [
+            "Health Resort east wing room 222 key",
+            "Labrys research notes",
+            "TerraGroup Labs access keycard",
+            "Object #11SR keycard",
+            "Crye Precision AVS plate carrier (Tagilla Edition)"
+        ]
+    },
+    "Shturman": {
+        "name": "Shturman",
+        "map": "Woods",
+        "spawn_chance": "39%",
+        "health": "812 HP",
+        "tactics": "Long-range defender. Shturman and his guards control the Sawmill with precision fire from a distance. They rarely leave cover and avoid close-quarters fights, using the terrain to their advantage to keep players suppressed and at range.",
+        "guard_count": "2",
+        "top_loot": [
+            "RB-BK Marked Key",
+            "RB-VO Marked Key",
+            "Kiba Arms Outer Door Key",
+            "Red Rebel Ice Pick",
+            "TerraGroup Labs Keycard (Red)"
+        ]
+    },
+    "Tagilla": {
+        "name": "Tagilla",
+        "map": "Factory, Night Factory",
+        "spawn_chance": "Factory(35%), Night Factory(35%)",
+        "health": "1220 HP",
+        "tactics": "Unhinged and relentless. Tagilla aggressively rushes players with a sledgehammer, breaching doors and setting ambushes. If he can’t reach you, he’ll switch to a ranged weapon—usually a shotgun—and suppress from afar. Active from the start of the raid, he wastes no time hunting intruders.",
+        "guard_count": "0",
+        "top_loot": [
+            "RB-BK Marked Key",
+            "RB-VO Marked Key",
+            "Kiba Arms Outer Door Key",
+            "TerraGroup Labs Keycard (Red)",
+            "Dorm Room 314 Marked Key"
+        ]
+    },
+    "Zryachiy": {
+        "name": "Zryachiy",
+        "map": "Lighthouse",
+        "spawn_chance": "100%",
+        "health": "1650 HP",
+        "tactics": "Disciplined and deliberate. Zryachiy maintains overwatch from concealed, long-range positions — rarely engaging unless provoked or guarding Lightkeeper’s interests. With sniper training and surgical aim, he strikes before most can react. Allied with Rogues and the hooded cultists, his presence signals layered defenses and deadly precision.",
+        "guard_count": "2",
+        "top_loot": [
+            "Zryachiy's balaclava",
+            "Zryachiy's balaclava (folded)",
+            "Kalashnikov AKS-74U 5.45x39 assault rifle"
+        ]
+    }
+}

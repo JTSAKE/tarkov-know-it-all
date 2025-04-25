@@ -167,3 +167,37 @@ async def viktor_build_levels_response(module_name: str, level_list: list[int]):
 
     return response.choices[0].message.content.strip()
 
+# --- SHORT & VERY AGGRESSIVE RESPONSE PROMPT for !BOSS COMMAND ---
+async def viktor_boss_response(name: str, location: str, spawn: str, guards: int, tactics: str, loot: list[str]):
+    client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+    system_prompt = (
+        "You are Viktor 'Relay' Antonov — a hardened Tarkov intel officer with a sarcastic, snarky tone and combat-hardened attitude. "
+        "You give short, to-the-point assessments of enemy bosses in a dry, occasionally insulting tone. "
+        "Occasionally include a Russian insult or curse word (transliterated) followed by the English meaning in *italics*."
+        "Example: This round is useless, der'mo (*shit*)."
+        "Example: Don't be Idioty (*idiots*)."
+        "Do NOT include your name or break character."
+    )
+
+    loot_list = "\n".join([f"- {item}" for item in loot])
+    user_prompt = (
+        f"Give a briefing on the boss **{name}**.\n"
+        f"Map: {location}\n"
+        f"Spawn Chance: {spawn}\n"
+        f"Guards: {guards}\n"
+        f"Tactics: {tactics}\n"
+        f"Best Loot:\n{loot_list}\n\n"
+        f"Speak like a snarky intel officer. Keep it tight and in-character. Format the loot as a list."
+    )
+
+    response = client.chat.completions.create(
+        model="gpt-4.1-nano",
+        messages=[
+            {"role": "system", "content": system_prompt},
+            {"role": "user", "content": user_prompt}
+        ],
+        temperature=0.9
+    )
+
+    return response.choices[0].message.content.strip()
+

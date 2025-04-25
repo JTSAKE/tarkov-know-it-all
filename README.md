@@ -7,11 +7,14 @@ A Discord bot built for Escape From Tarkov players. Viktor is more than a bot �
 ## 🧰 Current Features
 
 ### ✅ Core Framework
-- Modular command structure using Discord.py cogs
-- Error handling & logging
-- Custom `!help` command (in-character)
-- Dev mode heartbeat + debug toggles
-- `.env` support and secure API key loading
+- Modular command system using Discord.py cogs
+- Structured error handling and logging (`logs/bot.log`)
+- Custom in-character `!help` command
+- GPT-powered character layer with OpenAI API integration
+- Fuzzy matching for user input (boss names, calibers, items)
+- Dev mode tools (heartbeat loop, debug logging toggle)
+- `.env` support for secure API key and mode management
+- Static data handling via JSON files (`data/bosses.json`)
 
 ---
 
@@ -43,20 +46,29 @@ Fetches flea market and trader prices for any item.
 ---
 
 ### 🛠️ `!build <module name>`
-Returns all requirements to build or upgrade a hideout module.
-Fuzzy-matches hideout station names (bitcoin, medstation, water, etc.)
-Shows item counts, skill levels, and prerequisite modules for each level
-Pulls real-time data from Tarkov.dev's hideout structure
-Future-ready for Viktor to critique your base-building priorities
+- Returns all requirements to build or upgrade a hideout module.
+- Fuzzy-matches hideout station names (bitcoin, medstation, water, etc.)
+- Shows item counts, skill levels, and prerequisite modules for each level
+- Pulls real-time data from Tarkov.dev's hideout structure
+- Future-ready for Viktor to critique your base-building priorities
 
 ---
 
 ### 🧱 `!buildlvl <module name>`
-Lists all upgrade levels available for a given hideout module.
-Fuzzy-matches hideout station names (lavatory, intel, med, etc.)
-Displays available levels in a clean list (e.g., Lv1, Lv2, Lv3)
-Useful for planning what’s possible before gathering materials
-Viktor adds commentary about your ambitions (or lack thereof)
+- Lists all upgrade levels available for a given hideout module.
+- Fuzzy-matches hideout station names (lavatory, intel, med, etc.)
+- Displays available levels in a clean list (e.g., Lv1, Lv2, Lv3)
+- Useful for planning what’s possible before gathering materials
+- Viktor adds commentary about your ambitions (or lack thereof)
+
+---
+
+### 🎯 `!boss <boss name>`
+Intel report on any boss in Tarkov, delivered by Viktor.
+- Fuzzy name matching (`tagilla`, `killa`, `shadow`, etc.)
+- Includes spawn location, spawn chance, guards, tactics, and loot
+- Viktor summarizes with a snarky personality via GPT
+- Great for pre-raid planning or squad banter
 
 ---
 
@@ -73,9 +85,7 @@ Viktor "Relay" Antonov is a grizzled, ex-military AI advisor.
 
 ## 🚀 Planned Features
 
-- `!boss <map>`: Location intel, spawn chances, Viktor commentary
 - `!extracts <map>`: Accessible extract info
-- `!price <multi-item>`: Batch price queries
 - `!quest <name>`: Briefings and progression tracking
 - Viktor mood modes (`!viktormode chill`, `!viktormode brutal`)
 - Cooldown system + GPT query caching
@@ -85,11 +95,13 @@ Viktor "Relay" Antonov is a grizzled, ex-military AI advisor.
 ## 🛠️ Stack
 
 - Python 3.10+
-- Discord.py
-- Requests
-- OpenAI SDK (v1+)
-- Tarkov.dev GraphQL API
-- dotenv
+- [discord.py](https://github.com/Rapptz/discord.py) — Bot framework
+- [requests](https://pypi.org/project/requests/) — For API calls to Tarkov.dev
+- [openai](https://pypi.org/project/openai/) SDK v1+ — For GPT-powered replies from Viktor
+- [dotenv](https://pypi.org/project/python-dotenv/) — Environment variable management
+- [difflib](https://docs.python.org/3/library/difflib.html) — For fuzzy matching boss names
+- [Tarkov.dev GraphQL API](https://tarkov.dev/api) — All live game data (ammo, flea market, hideout, etc.)
+- JSON-based data layer for custom boss intel
 
 ---
 
@@ -102,13 +114,18 @@ Currently built for internal squad use, but may be open-sourced in the future. D
 
 ```bash
 .
-├── bot.py                # Entry point
-├── .env                  # API keys and dev flags
-├── cogs/
-│   ├── ammo.py           # !ammo and !calibers
-│   ├── price.py          # !price intel
-│   └── help.py           # Custom help command
-├── ai/
-│   └── relay.py          # GPT integration and prompt engineering
+├── bot.py                  # Bot entry point
+├── .env                    # API keys and config flags
+├── requirements.txt        # Python dependencies
+├── cogs/                   # Modular command handlers
+│   ├── ammo.py             # !ammo and !calibers
+│   ├── price.py            # !price flea market/trader data
+│   ├── boss.py             # !boss command, fuzzy search + Viktor
+│   ├── chat.py             # !reply and !introduce for GPT dialog
+│   └── help.py             # Custom help command
+├── ai/                     # GPT prompt + response logic
+│   └── relay.py            # Viktor personality and chat behavior
+├── data/                   # Static game intel
+│   └── bosses.json         # Handcrafted boss intel (loot, tactics, etc.)
 ├── logs/
-│   └── bot.log           # Logging output
+│   └── bot.log             # Logging output

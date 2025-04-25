@@ -236,3 +236,58 @@
 [2025-04-24 20:17:29,251] [INFO] logging in using static token
 [2025-04-24 20:17:31,441] [INFO] Shard ID None has connected to Gateway (Session ID: 29757b5723d3357e38095921051174a6).
 [2025-04-24 20:17:42,607] [INFO] HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+[2025-04-24 20:33:04,991] [WARNING] PyNaCl is not installed, voice will NOT be supported
+[2025-04-24 20:33:06,062] [INFO] logging in using static token
+[2025-04-24 20:33:07,121] [INFO] Shard ID None has connected to Gateway (Session ID: c5a70e2de5e1741d7057866d726ac31a).
+[2025-04-24 20:33:52,993] [WARNING] PyNaCl is not installed, voice will NOT be supported
+[2025-04-24 20:33:53,912] [INFO] logging in using static token
+[2025-04-24 20:33:55,199] [INFO] Shard ID None has connected to Gateway (Session ID: 21ac810d552e32c1a7f154a30b1d2156).
+[2025-04-24 20:34:36,607] [WARNING] PyNaCl is not installed, voice will NOT be supported
+[2025-04-24 20:34:37,623] [INFO] logging in using static token
+[2025-04-24 20:34:40,431] [INFO] Shard ID None has connected to Gateway (Session ID: 3b22b8e13706466aa700a67b1360fb1c).
+[2025-04-24 20:35:08,728] [INFO] HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+[2025-04-24 21:15:41,936] [WARNING] PyNaCl is not installed, voice will NOT be supported
+[2025-04-24 21:17:23,969] [WARNING] PyNaCl is not installed, voice will NOT be supported
+[2025-04-24 21:17:41,234] [WARNING] PyNaCl is not installed, voice will NOT be supported
+[2025-04-24 21:17:42,170] [INFO] logging in using static token
+[2025-04-24 21:17:43,492] [INFO] Shard ID None has connected to Gateway (Session ID: ae46945b8c3ca88a8930d9296eea5f39).
+[2025-04-24 21:17:57,361] [INFO] HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+[2025-04-24 21:20:09,589] [WARNING] PyNaCl is not installed, voice will NOT be supported
+[2025-04-24 21:20:10,530] [INFO] logging in using static token
+[2025-04-24 21:20:11,538] [INFO] Shard ID None has connected to Gateway (Session ID: 1e64c8ea72b1765d782315ebb3017a21).
+[2025-04-24 21:20:28,312] [INFO] HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+[2025-04-24 21:21:26,633] [WARNING] PyNaCl is not installed, voice will NOT be supported
+[2025-04-24 21:21:27,562] [INFO] logging in using static token
+[2025-04-24 21:21:28,613] [INFO] Shard ID None has connected to Gateway (Session ID: 7205a2d28160d0dd0c5f86a553dc5cd2).
+[2025-04-24 21:21:57,435] [INFO] HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+[2025-04-24 21:23:17,651] [WARNING] PyNaCl is not installed, voice will NOT be supported
+[2025-04-24 21:23:18,589] [INFO] logging in using static token
+[2025-04-24 21:23:19,815] [INFO] Shard ID None has connected to Gateway (Session ID: 4bf4efbba853cb7ce5a4d5322ed7f27c).
+[2025-04-24 21:23:31,908] [INFO] HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+[2025-04-24 21:24:51,648] [WARNING] PyNaCl is not installed, voice will NOT be supported
+[2025-04-24 21:24:52,642] [INFO] logging in using static token
+[2025-04-24 21:24:53,614] [INFO] Shard ID None has connected to Gateway (Session ID: 1528108e9da53bc7f64cad2b1f434241).
+[2025-04-24 21:25:00,272] [INFO] HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+[2025-04-24 21:28:39,479] [WARNING] PyNaCl is not installed, voice will NOT be supported
+[2025-04-24 21:28:40,433] [INFO] logging in using static token
+[2025-04-24 21:28:41,825] [INFO] Shard ID None has connected to Gateway (Session ID: 6fca5689dcb93f63e5e61d3a480126d6).
+[2025-04-24 21:28:50,962] [INFO] HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+[2025-04-24 21:30:39,187] [WARNING] PyNaCl is not installed, voice will NOT be supported
+[2025-04-24 21:30:40,117] [INFO] logging in using static token
+[2025-04-24 21:30:41,200] [INFO] Shard ID None has connected to Gateway (Session ID: 666c6a034b9c4e15ae60d94f42c4d388).
+[2025-04-24 21:30:51,230] [INFO] HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+[2025-04-24 21:34:11,228] [WARNING] PyNaCl is not installed, voice will NOT be supported
+[2025-04-24 21:34:12,164] [INFO] logging in using static token
+[2025-04-24 21:34:13,208] [INFO] Shard ID None has connected to Gateway (Session ID: 259efd46995e0cb09a22d84f1b78cb93).
+[2025-04-24 21:34:23,773] [INFO] HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+[2025-04-24 21:35:17,591] [WARNING] PyNaCl is not installed, voice will NOT be supported
+[2025-04-24 21:35:18,579] [INFO] logging in using static token
+[2025-04-24 21:35:19,629] [INFO] Shard ID None has connected to Gateway (Session ID: c38690644a16042e5f2e79f997af982f).
+[2025-04-24 21:38:47,260] [WARNING] PyNaCl is not installed, voice will NOT be supported
+[2025-04-24 21:39:32,052] [WARNING] PyNaCl is not installed, voice will NOT be supported
+[2025-04-24 21:39:33,063] [INFO] logging in using static token
+[2025-04-24 21:39:34,246] [INFO] Shard ID None has connected to Gateway (Session ID: eb497f3832e4cd8ca7a274ea8f29c45f).
+[2025-04-24 21:42:41,880] [WARNING] PyNaCl is not installed, voice will NOT be supported
+[2025-04-24 21:42:42,870] [INFO] logging in using static token
+[2025-04-24 21:42:43,816] [INFO] Shard ID None has connected to Gateway (Session ID: 412b9a0435b526ab7516488f38bac559).
+[2025-04-24 21:42:54,397] [INFO] HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
