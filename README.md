@@ -42,6 +42,24 @@ Fetches flea market and trader prices for any item.
 
 ---
 
+### 🛠️ !build <module name>
+Returns all requirements to build or upgrade a hideout module.
+Fuzzy-matches hideout station names (bitcoin, medstation, water, etc.)
+Shows item counts, skill levels, and prerequisite modules for each level
+Pulls real-time data from Tarkov.dev's hideout structure
+Future-ready for Viktor to critique your base-building priorities
+
+---
+
+### 🧱 !buildlvl <module name>
+Lists all upgrade levels available for a given hideout module.
+Fuzzy-matches hideout station names (lavatory, intel, med, etc.)
+Displays available levels in a clean list (e.g., Lv1, Lv2, Lv3)
+Useful for planning what’s possible before gathering materials
+Viktor adds commentary about your ambitions (or lack thereof)
+
+---
+
 ## 🧠 Viktor: The Personality
 
 Viktor "Relay" Antonov is a grizzled, ex-military AI advisor.

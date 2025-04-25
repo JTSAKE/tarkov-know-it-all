@@ -1,58 +1,6 @@
 from openai import OpenAI
 import os
 
-# --- LONGER MORE PERSONALITY RESPONSE PROMPT ---
-# async def get_viktor_response(caliber, ammo_data):
-#     client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
-
-#     prompt = f"""
-# You are Viktor 'Relay' Antonov — a hardened, sarcastic, ex-military AI intel specialist for a PMC operating in Tarkov.
-
-# You're briefing your squad leader on the available ammo options for the caliber: {caliber}.
-
-# Here is the ammo data:
-# {ammo_data}
-
-# Respond like you're prepping an op — tactical, efficient, a little snarky. Recommend the best rounds for PvP and PvE. If there's junk ammo, call it out. Never break character.
-#     """
-
-#     response = client.chat.completions.create(
-#         model="gpt-4.1-nano",
-#         messages=[
-#             {"role": "system", "content": "You are Viktor 'Relay' Antonov, PMC squad AI advisor. Stay in character."},
-#             {"role": "user", "content": prompt}
-#         ],
-#         temperature=0.7,
-#         max_tokens=500
-#     )
-
-
-# --- SHORTER MORE CONCISE RESPONSE PROMPT ---
-# async def get_viktor_response(caliber, ammo_data):
-
-#     client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
-#     prompt = f"""
-# You are Viktor 'Relay' Antonov — a hardened, sarcastic, ex-military AI intel specialist embedded in a PMC squad's comms. 
-
-# You're briefing your squad leader on the available ammo options for the caliber: {caliber}.
-
-# Here is the ammo data:
-# {ammo_data}
-
-# Respond concisely — no long paragraphs. Give a **brief tactical analysis**, recommend the **best rounds** for PvP and PvE, and call out any junk. Limit your reply to just **2–4 short lines**. Always stay in character.
-# """
-
-#     response = client.chat.completions.create(
-#         model="gpt-4.1-nano",
-#         messages=[
-#             {"role": "system", "content": "You are Viktor 'Relay' Antonov, PMC squad AI advisor. Stay in character."},
-#             {"role": "user", "content": prompt}
-#         ],
-#         temperature=0.7,
-#         max_tokens=500
-#     )
-
-
 # --- SHORT & VERY AGGRESSIVE RESPONSE PROMPT for !AMMO COMMAND---
 async def get_viktor_response(caliber, ammo_data):
     client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
@@ -91,7 +39,7 @@ async def get_viktor_response(caliber, ammo_data):
 
     return response.choices[0].message.content.strip()
 
-# --- FUNCATION THAT !REPLY & !INTRODUCE RELY ON ---
+# --- RESPONSE PROMPT FOR !REPLY & !INTRODUCE ---
 async def get_viktor_chat(prompt: str) -> str:
     client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
     """
@@ -153,6 +101,68 @@ async def get_price_commentary(item_name, pricing_data):
         ],
         temperature=0.8,
         max_tokens=300
+    )
+
+    return response.choices[0].message.content.strip()
+
+# --- SHORT & VERY AGGRESSIVE RESPONSE PROMPT for !BUILD COMMAND --- 
+async def viktor_hideout_response(module_name: str, level: int, requirement_summary: str):
+    client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+    system_prompt = (
+        "You are Viktor 'Relay' Antonov — a sarcastic, tactical intelligence officer in Tarkov. "
+        "You're briefing a PMC on hideout upgrade requirements. Be dry, efficient, and snarky. "
+        "Keep it organized. Use bullet points. "
+        "Occasionally include a Russian insult or curse word (transliterated), followed by the English meaning in *italics*."
+        "Example: This round is useless, der'mo (*shit*)."
+        "Example: Don't be Idioty (*idiots*)."
+        "NEVER include your name or break character."
+    )
+
+    user_prompt = (
+        f"The PMC is upgrading **{module_name} Lv{level}**. Here are the requirements:\n"
+        f"{requirement_summary}\n\n"
+        "Give a short, brutal summary of what they need, whether it's worth it, and if they're in over their head."
+    )
+
+    response = client.chat.completions.create(
+        model="gpt-4.1-nano",
+        messages=[
+            {"role": "system", "content": system_prompt},
+            {"role": "user", "content": user_prompt}
+        ],
+        temperature=0.85
+    )
+
+    return response.choices[0].message.content.strip()
+
+# --- SHORT & VERY AGGRESSIVE RESPONSE PROMPT for !BUILDLVL COMMAND ---
+async def viktor_build_levels_response(module_name: str, level_list: list[int]):
+    client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+    system_prompt = (
+        "You are Viktor 'Relay' Antonov, a sarcastic PMC intelligence officer in Tarkov. "
+        "You're informing a squad member about the available upgrade levels for a hideout module. "
+        "Keep it short, sharp, and slightly condescending."
+        "Occasionally include a Russian insult or curse word (transliterated), followed by the English meaning in *italics*."
+        "Example: This round is useless, der'mo (*shit*)."
+        "Example: Don't be Idioty (*idiots*)."
+        "Do NOT include your name or break character."
+    )
+
+    levels_str = ", ".join(f"Lv{lvl}" for lvl in sorted(level_list))
+
+    user_prompt = (
+        f"The PMC asked which upgrade levels are available for the hideout module: **{module_name}**.\n"
+        f"The available levels are: {levels_str}.\n"
+        "Give a quick overview with snark or judgement about how far they might actually get."
+    )
+
+    response = client.chat.completions.create(
+        model="gpt-4.1-nano",
+        messages=[
+            {"role": "system", "content": system_prompt},
+            {"role": "user", "content": user_prompt}
+        ],
+        temperature=0.8
     )
 
     return response.choices[0].message.content.strip()

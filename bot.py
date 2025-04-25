@@ -38,6 +38,7 @@ async def main():
     await bot.load_extension("cogs.help")
     await bot.load_extension("cogs.price")
     await bot.load_extension("cogs.chat")
+    await bot.load_extension("cogs.hideout")
     await bot.start(TOKEN)
 
 @bot.event
