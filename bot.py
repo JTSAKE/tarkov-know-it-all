@@ -8,6 +8,7 @@ from discord.ext import tasks
 
 load_dotenv()
 TOKEN = os.getenv("DISCORD_TOKEN")
+logger = logging.getLogger(__name__)
 
 #Setup structured logging
 logging.basicConfig(
@@ -21,6 +22,14 @@ logging.basicConfig(
 
 #Enable Heartbeat when env setting set to true.
 DEBUG_MODE = os.getenv("DEBUG_MODE", "false").lower() == "true"
+
+#Signifies the start of a new session
+logger.info("--- New Session ---")
+
+#Prints message in terminal to confirm bot is running
+@tasks.loop(seconds=60)
+async def heartbeat():
+    print("[DEBUG] Bot running...")
 
 intents = discord.Intents.default()
 intents.message_content = True
@@ -43,16 +52,13 @@ async def main():
     await bot.load_extension("cogs.quest")
     await bot.start(TOKEN)
 
+
 @bot.event
 async def on_ready():
     print(f"[INFO] Logged in as {bot.user} (ID: {bot.user.id})")
     
     if DEBUG_MODE:
-        print("[DEBUG] Debug mode enabled — starting heartbeat.")
+        print("[DEBUG] Debug mode enabled — starting heartbeat")
         heartbeat.start()
-
-@tasks.loop(seconds=60)
-async def heartbeat():
-    print("[DEBUG] Bot running...")
 
 asyncio.run(main())

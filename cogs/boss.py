@@ -1,9 +1,12 @@
-import discord
-from discord.ext import commands
-import json
 import os
+import json
+import logging
+import time
+from discord.ext import commands
 from difflib import get_close_matches
-from ai.relay import viktor_boss_response 
+from ai.relay import viktor_boss_response
+
+logger = logging.getLogger(__name__)
 
 class Boss(commands.Cog):
     def __init__(self, bot):
@@ -19,37 +22,35 @@ class Boss(commands.Cog):
     
     @commands.command()
     async def boss(self, ctx, *, name: str):
-        matched_name = self.find_closest_boss(name)
-        if not matched_name:
-            await ctx.send(f"No data found for boss '{name}'. Check your spelling or try again.")
-            return
-        
-        boss = self.boss_data[matched_name]
+        try:
+            matched_name = self.find_closest_boss(name)
+            if not matched_name:
+                await ctx.send(f"No data found for boss '{name}'. Check your spelling or try again.")
+                return
+            
+            boss = self.boss_data[matched_name]
+            
+            # Start timing GPT response
+            start_time = time.perf_counter()
 
-        # Build a formatted string of the intel
-        intel = (
-            f"**Name:** {boss['name']}\n"
-            f"**Map:** {boss['map']}\n"
-            f"**Spawn Chance:** {boss['spawn_chance']}\n"
-            f"**Health:** {boss['health']}\n"
-            f"**Guards:** {boss['guard_count']}\n"
-            f"**Tactics:** {boss['tactics']}\n"
-            f"**Top Loot:**\n" + "\n".join(f"- {item}" for item in boss["top_loot"])
-        )
+            # Send Viktor’s breakdown
+            viktor = await viktor_boss_response(
+                boss['name'],
+                boss['map'],
+                boss['spawn_chance'],
+                boss['guard_count'],
+                boss['tactics'],
+                boss['top_loot']
+            )
 
-        # Send Viktor’s breakdown
-        viktor = await viktor_boss_response(
-            boss['name'],
-            boss['map'],
-            boss['spawn_chance'],
-            boss['guard_count'],
-            boss['tactics'],
-            boss['top_loot']
-        )
-        await ctx.send(viktor)
+            latency = time.perf_counter() - start_time
+            logger.info("[!BOSS GPT API] Viktor GPT response took %.2f seconds", latency)
 
-        # # Send the raw intel block too for clarity
-        # await ctx.send(intel[:1990])  # Discord message limit
+            await ctx.send(viktor)
+
+        except Exception as e:
+            logger.error(f"[!BOSS] in !boss command: {e}", exc_info=True)
+            await ctx.send("Viktor ran into some corrupted intel. Try again later, comrade.")
 
 async def setup(bot):
     await bot.add_cog(Boss(bot))

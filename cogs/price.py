@@ -1,9 +1,13 @@
-from discord.ext import commands
-import requests
-import difflib
 import os
+import difflib
+import logging
+import requests
+import time
+from discord.ext import commands
 from ai.relay import get_price_commentary
 
+# Setup logging
+logger = logging.getLogger(__name__)
 TARKOV_API_URL = "https://api.tarkov.dev/graphql"
 DEBUG_MODE = os.getenv("DEBUG_MODE", "false").lower() == "true"
 
@@ -14,60 +18,69 @@ class Price(commands.Cog):
     @commands.command()
     async def price(self, ctx, *, item_name: str):
         """Returns flea market price info for an item."""
-
-        query = {
-            "query": """
-            query {
-             items {
-                id
-                name
-                shortName
-                avg24hPrice
-                lastLowPrice
-                sellFor {
-                  price
-                  source
+        try:
+            query = {
+                "query": """
+                query {
+                items {
+                    id
+                    name
+                    shortName
+                    avg24hPrice
+                    lastLowPrice
+                    sellFor {
+                    price
+                    source
+                    }
                 }
-              }
+                }
+                """
             }
+
+            response = requests.post(TARKOV_API_URL, json=query)
+            if response.status_code != 200:
+                logger.error("[!PRICE API] Tarkov.dev API request failed with status %s", response.status_code)
+                await ctx.send("Failed to fetch price data.")
+                return
+
+            items = response.json().get("data", {}).get("items", [])
+
+            # Try to find best match
+            match = self.find_best_item_match(item_name, items)
+
+            if not match:
+                logger.warning("[PRICE COMMAND ITEM MATCHING] No matching item found for query: %s", item_name)
+                await ctx.send("Couldn’t find a matching item. Try being less bad.")
+                return
+
+            #Passing Match to Viktor
+            name = match["name"]
+            avg_price = match.get("avg24hPrice", 0)
+            low_price = match.get("lastLowPrice", 0)
+
+            trader_prices = match.get("sellFor", [])
+            trader_summary = "\n".join([f"{t['source']}: {t['price']}₽" for t in trader_prices])
+
+            # Build summary for GPT
+            summary = f"""
+            Item: {name}
+            24h Average Price: {avg_price:,}₽
+            Last Known Flea Price: {low_price:,}₽
+            Trader Sell Offers:
+            {trader_summary}
             """
-        }
 
-        response = requests.post(TARKOV_API_URL, json=query)
-        if response.status_code != 200:
-            await ctx.send("Failed to fetch price data.")
-            return
+            # Time GPT call
+            start_time = time.perf_counter()
+            viktor_response = await get_price_commentary(name, summary)
+            latency = time.perf_counter() - start_time
+            logger.info("[!PRICE GPT API] Viktor GPT response took %.2f seconds", latency)
 
-        items = response.json().get("data", {}).get("items", [])
+            await ctx.send(viktor_response)
 
-        # Try to find best match
-        match = self.find_best_item_match(item_name, items)
-
-        if not match:
-            await ctx.send("Couldn’t find a matching item. Try being less bad.")
-            return
-
-        #Passing Match to Viktor
-        name = match["name"]
-        avg_price = match.get("avg24hPrice", 0)
-        low_price = match.get("lastLowPrice", 0)
-
-        trader_prices = match.get("sellFor", [])
-        trader_summary = "\n".join([f"{t['source']}: {t['price']}₽" for t in trader_prices])
-
-        # Build summary for GPT
-        summary = f"""
-        Item: {name}
-        24h Average Price: {avg_price:,}₽
-        Last Known Flea Price: {low_price:,}₽
-        Trader Sell Offers:
-        {trader_summary}
-        """
-
-        # Pass to Viktor
-        viktor_response = await get_price_commentary(name, summary)
-
-        await ctx.send(viktor_response)
+        except Exception as e:
+            logger.exception("[!PRICE] Unexpected error occurred: %s", str(e))
+            await ctx.send("Something went wrong pulling that price intel.")
 
     def find_best_item_match(self, query, items):
         query = query.strip().lower()
