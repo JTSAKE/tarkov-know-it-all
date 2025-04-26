@@ -93,8 +93,6 @@ Viktor "Relay" Antonov is a grizzled, ex-military AI advisor.
 
 ## 🚀 Planned Features
 
-- `!extracts <map>`: Accessible extract info
-- `!quest <name>`: Briefings and progression tracking
 - Viktor mood modes (`!viktormode chill`, `!viktormode brutal`)
 - Cooldown system + GPT query caching
 
