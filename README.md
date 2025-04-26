@@ -72,6 +72,14 @@ Intel report on any boss in Tarkov, delivered by Viktor.
 
 ---
 
+### 📜 `!quest <quest name>`
+Fetches quest details and a no-nonsense briefing from Viktor.
+- Live quest data pulled from Tarkov.dev
+- Shows quest name, trader, XP reward, and objectives
+- Viktor summarizes with sarcasm, insults, and tactical advice
+- Automatically links to the Tarkov Wiki for complex quests
+
+---
 ## 🧠 Viktor: The Personality
 
 Viktor "Relay" Antonov is a grizzled, ex-military AI advisor.

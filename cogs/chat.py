@@ -17,7 +17,7 @@ class Chat(commands.Cog):
         await ctx.send(response)
 
     @commands.command()
-    async def introduce(self, ctx):
+    async def intro(self, ctx):
         """Have Viktor introduce himself."""
         prompt = (
             "Introduce yourself as Viktor 'Relay' Antonov — a grizzled, sarcastic ex-PMC who now handles intel for a squad of hopeless operators in Tarkov. "

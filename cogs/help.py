@@ -13,14 +13,15 @@ class CustomHelp(commands.Cog):
         message = (
             "**Command Reference:**\n\n"
             "`!ping` — Check if the bot is online.\n"
-            "`!ammo [caliber]` — Get a list of ammo for a given caliber.\n"
+            "`!ammo <caliber>` — Get a list of ammo for a given caliber.\n"
             "`!calibers` — View all supported caliber inputs.\n"
-            "`!boss [name]` — Intel report on a boss, plus Viktor’s take.\n"
-            "`!price [item name]` — View item price on flea market and from traders.\n"
-            "`!build [module name]` — View required items, skills, and stations for a hideout module.\n"
-            "`!buildlvl [module name]` — Lists available upgrade levels for a hideout module.\n"
-            "`!reply [message]` — Chat directly with Viktor and get a personalized response.\n"
-            "`!introduce` — Have Viktor introduce himself and share his backstory.\n"
+            "`!boss <name>` — Intel report on a boss, plus Viktor’s take.\n"
+            "`!price <item name>` — View item price on flea market and from traders.\n"
+            "`!build <module name>` — View required items, skills, and stations for a hideout module.\n"
+            "`!buildlvl <module name>` — Lists available upgrade levels for a hideout module.\n"
+            "`!reply <message>` — Chat directly with Viktor and get a personalized response.\n"
+            "`!intro` — Have Viktor introduce himself and share his backstory.\n"
+            "`!quest <quest name>`- Briefing and intel on Tarkov quests.\n"
             "`!help` — Display this help message.\n"
         )
         await ctx.send(message)
