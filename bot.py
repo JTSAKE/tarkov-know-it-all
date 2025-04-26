@@ -40,6 +40,7 @@ async def main():
     await bot.load_extension("cogs.chat")
     await bot.load_extension("cogs.hideout")
     await bot.load_extension("cogs.boss")
+    await bot.load_extension("cogs.quest")
     await bot.start(TOKEN)
 
 @bot.event

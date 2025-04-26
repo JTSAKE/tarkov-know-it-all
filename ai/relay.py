@@ -201,3 +201,66 @@ async def viktor_boss_response(name: str, location: str, spawn: str, guards: int
 
     return response.choices[0].message.content.strip()
 
+
+#--- SHORT & VERY AGGRESSIVE RESPONSE PROMPT for !QUEST COMMAND ---
+async def get_viktor_quest_response(name, trader, experience, min_level, objectives, has_special_objective):
+    client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+
+    """Crafts Viktor's sarcastic reply for a quest."""
+    # Start building basic intel
+    base_info = f"""
+        Quest Name: {name}
+        Given By: {trader}
+        Experience Reward: {experience}
+        Minimum Level Required: {min_level}
+        Objectives:
+        """
+
+    for obj in objectives:
+        base_info += f"- {obj.get('description', 'Unknown Objective')}\n"
+
+    system_prompt = """"
+    You are Viktor 'Relay' Antonov — a grizzled PMC intel officer. Occasionally include a Russian insult or curse word followed by the English meaning in parentheses in *italics*.
+    Example: This round is useless, der'mo (*shit*).
+    Example: Don't be Idioty (*idiots*).
+    You MUST include english translations following the previously mentioned format.
+    Your reply MUST include the experience reward.
+    Your reply MUST include the minimum level required.
+    DO NOT repeat the quest name exactly as it is, simplify it.
+    Do NOT include your name or break character."""
+
+    # Start building the system prompt
+    quest_prompt = f"""
+        You are Viktor 'Relay' Antonov — a hardened, sarcastic, slightly aggressive PMC intelligence officer in Escape from Tarkov.
+
+        You are briefing a squadmate about the quest below. Keep it short, slightly insulting, and ruthlessly practical. 
+        If the objectives seem tedious (like 'Find Gas Analyzers') or 'Visit' locations, make a sarcastic comment.
+        Always summarize the intel bluntly.
+
+        Quest Details:
+        {base_info}
+        """
+
+    if has_special_objective:
+        quest_prompt += "\nAlso mention there are extra resources attached below."
+
+    response = client.chat.completions.create(
+            model="gpt-4.1-nano",
+            messages=[
+                {"role": "system", "content": system_prompt},
+                {"role": "user", "content": quest_prompt}
+            ],
+            temperature=0.8,
+            max_tokens=600
+        )
+
+    viktor_reply = response.choices[0].message.content
+
+    # Add wiki link if needed
+    if has_special_objective:
+        safe_task_name = name.replace(' ', '_')
+        wiki_url = f"https://escapefromtarkov.fandom.com/wiki/{safe_task_name}"
+        
+        viktor_reply += f"\n\n---\nHelpful Resources:\n [View on Wiki]({wiki_url})"
+
+    return viktor_reply
