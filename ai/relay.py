@@ -1,5 +1,5 @@
-from openai import OpenAI
 import os
+from openai import OpenAI
 
 # --- SHORT & VERY AGGRESSIVE RESPONSE PROMPT for !AMMO COMMAND---
 async def get_viktor_response(caliber, ammo_data):

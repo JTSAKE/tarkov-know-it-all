@@ -1,10 +1,10 @@
 import os
-import discord
-from discord.ext import commands
-from dotenv import load_dotenv
-import logging
 import asyncio
+import discord
+import logging
+from discord.ext import commands
 from discord.ext import tasks
+from dotenv import load_dotenv
 
 load_dotenv()
 TOKEN = os.getenv("DISCORD_TOKEN")
