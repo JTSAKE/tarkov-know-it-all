@@ -4,9 +4,9 @@ A Discord bot built for Escape From Tarkov players. Viktor is more than a bot �
 
 ---
 
-## 🧰 Current Features
+## Current Features
 
-### ✅ Core Framework
+### Core Framework
 - Modular command system using Discord.py cogs
 - Structured error handling and logging (`logs/bot.log`)
 - Custom in-character `!help` command
@@ -18,7 +18,7 @@ A Discord bot built for Escape From Tarkov players. Viktor is more than a bot �
 
 ---
 
-### 🔫 `!ammo <caliber>`
+### `!ammo <caliber>`
 Fetches real-time ammo data from the [Tarkov.dev](https://tarkov.dev) API and sends it through OpenAI's GPT model.
 
 - Returns top-performing ammo by penetration
@@ -28,15 +28,15 @@ Fetches real-time ammo data from the [Tarkov.dev](https://tarkov.dev) API and se
 
 ---
 
-### 🎯 `!calibers`
+### `!calibers`
 - Returns a list of supported ammo calibers
 - Response is in-character from Viktor
 - Delivered with attitude and a jab or two for even asking
 
 ---
 
-### 💰 `!price <item name>`
-Fetches flea market and trader prices for any item.
+### `!price <item name>`
+Fetches flea market and trader prices from the [Tarkov.dev](https://tarkov.dev) API and sends it through OpenAI's GPT model.
 
 - Uses fuzzy matching (`gpu` → `Graphics Card`)
 - Live pricing from Tarkov.dev (24h average, low, trader offers)
@@ -45,25 +45,7 @@ Fetches flea market and trader prices for any item.
 
 ---
 
-### 🛠️ `!build <module name>`
-- Returns all requirements to build or upgrade a hideout module.
-- Fuzzy-matches hideout station names (bitcoin, medstation, water, etc.)
-- Shows item counts, skill levels, and prerequisite modules for each level
-- Pulls real-time data from Tarkov.dev's hideout structure
-- Future-ready for Viktor to critique your base-building priorities
-
----
-
-### 🧱 `!buildlvl <module name>`
-- Lists all upgrade levels available for a given hideout module.
-- Fuzzy-matches hideout station names (lavatory, intel, med, etc.)
-- Displays available levels in a clean list (e.g., Lv1, Lv2, Lv3)
-- Useful for planning what’s possible before gathering materials
-- Viktor adds commentary about your ambitions (or lack thereof)
-
----
-
-### 🎯 `!boss <boss name>`
+###  `!boss <boss name>`
 Intel report on any boss in Tarkov, delivered by Viktor.
 - Fuzzy name matching (`tagilla`, `killa`, `shadow`, etc.)
 - Includes spawn location, spawn chance, guards, tactics, and loot
@@ -72,15 +54,54 @@ Intel report on any boss in Tarkov, delivered by Viktor.
 
 ---
 
-### 📜 `!quest <quest name>`
-Fetches quest details and a no-nonsense briefing from Viktor.
+###  `!build <module name>`
+Fetches build requiredments from the [Tarkov.dev](https://tarkov.dev) API and sends it through OpenAI's GPT model.
+- Returns all requirements to build or upgrade a hideout module.
+- Fuzzy-matches hideout station names (bitcoin, medstation, water, etc.)
+- Shows item counts, skill levels, and prerequisite modules for each level
+- Pulls real-time data from Tarkov.dev's hideout structure
+- Future-ready for Viktor to critique your base-building priorities
+
+---
+
+### `!buildlvl <module name>`
+Fetches build levels from the [Tarkov.dev](https://tarkov.dev) API and sends it through OpenAI's GPT model.
+- Lists all upgrade levels available for a given hideout module.
+- Fuzzy-matches hideout station names (lavatory, intel, med, etc.)
+- Displays available levels in a clean list (e.g., Lv1, Lv2, Lv3)
+- Useful for planning what’s possible before gathering materials
+- Viktor adds commentary about your ambitions (or lack thereof)
+
+---
+
+### `!intro`
+Have Viktor explain who (and what) he is.
+- Viktor gives his gritty, sarcastic backstory
+- Responds with tactical wisdom and Russian-flavored insults
+- Sets the tone for how he interacts with the squad
+- Perfect intro for new team members
+
+---
+
+### `!quest <quest name>`
+Fetches quest details from the [Tarkov.dev](https://tarkov.dev) API and sends it through OpenAI's GPT model.
 - Live quest data pulled from Tarkov.dev
 - Shows quest name, trader, XP reward, and objectives
 - Viktor summarizes with sarcasm, insults, and tactical advice
 - Automatically links to the Tarkov Wiki for complex quests
 
 ---
-## 🧠 Viktor: The Personality
+
+### `!reply <message>`
+Chat directly with Vikor in real-timee.
+- GPT-powered banter with Viktor’s sarcastic tone
+- Responds with tactical wisdom and Russian-flavored insults
+- Great for roleplay, squad immersion, or laughs
+- Every message generates a unique, in-character reply
+
+---
+
+## Viktor: The Personality
 
 Viktor "Relay" Antonov is a grizzled, ex-military AI advisor.
 
@@ -91,10 +112,9 @@ Viktor "Relay" Antonov is a grizzled, ex-military AI advisor.
 
 ---
 
-## 🚀 Planned Features
+## Planned Features
 
-- Viktor mood modes (`!viktormode chill`, `!viktormode brutal`)
-- Cooldown system + GPT query caching
+- Player Lookup Command - Look up player stats and profiles and ask Viktor for his commentary.
 
 ---
 
@@ -128,6 +148,8 @@ Currently built for internal squad use, but may be open-sourced in the future. D
 │   ├── price.py            # !price flea market/trader data
 │   ├── boss.py             # !boss command, fuzzy search + Viktor
 │   ├── chat.py             # !reply and !introduce for GPT dialog
+│   ├── quest.py            # !quest briefing + GPT analysis
+│   ├── hideout.py          # !build and !buildlvl for hideout planning
 │   └── help.py             # Custom help command
 ├── ai/                     # GPT prompt + response logic
 │   └── relay.py            # Viktor personality and chat behavior
