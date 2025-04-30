@@ -37,6 +37,16 @@ intents.message_content = True
 bot = commands.Bot(command_prefix='!', intents=intents)
 
 @bot.event
+async def on_command(ctx):
+    logger.info(
+        "[COMMAND] %s used by %s (%s): %s",
+        ctx.command,
+        ctx.author.display_name,
+        ctx.author.id,
+        ctx.message.content
+    )
+
+@bot.event
 async def on_ready():
     print(f"Logged in as {bot.user}!")
 
