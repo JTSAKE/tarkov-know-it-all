@@ -118,7 +118,7 @@ Viktor "Relay" Antonov is a grizzled, ex-military AI advisor.
 
 ---
 
-## 🛠️ Stack
+## Stack
 
 - Python 3.10+
 - [discord.py](https://github.com/Rapptz/discord.py) — Bot framework
@@ -131,12 +131,7 @@ Viktor "Relay" Antonov is a grizzled, ex-military AI advisor.
 
 ---
 
-## 👥 For the Squad (Eventually)
-Currently built for internal squad use, but may be open-sourced in the future. Designed to scale from utility bot → immersive squadmate → full PMC toolkit.
-
----
-
-## 📁 Project Structure
+## Project Structure
 
 ```bash
 .
