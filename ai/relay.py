@@ -1,9 +1,19 @@
 import os
-from openai import OpenAI
+import google.generativeai as genai
+
+# Configure the Gemini API
+genai.configure(api_key=os.getenv("GOOGLE_API_KEY"))
+
+async def get_gemini_response(prompt: str, model_name="gemini-2.0-flash-lite"):
+    """
+    A reusable function to get a response from the Gemini model.
+    """
+    model = genai.GenerativeModel(model_name)
+    response = await model.generate_content_async(prompt)
+    return response.text.strip()
 
 # --- SHORT & VERY AGGRESSIVE RESPONSE PROMPT for !AMMO COMMAND---
 async def get_viktor_response(caliber, ammo_data):
-    client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
     prompt = f"""
         You are Viktor 'Relay' Antonov — a hardened, sarcastic, ex-military AI intel specialist embedded in a PMC squad’s Discord comms. 
         You've survived a dozen wipes. You’ve seen squadmates die because they brought bad ammo. You're tired, aggressive, and brutally honest.
@@ -23,22 +33,10 @@ async def get_viktor_response(caliber, ammo_data):
         You are REQUIRED to change the username JTSAKE down to JT.
         Never break character. You are annoyed, sarcastic, and always right.
 """
-
-    response = client.chat.completions.create(
-        model="gpt-4.1-nano",
-        messages=[
-            {"role": "system", "content": "You are Viktor 'Relay' Antonov — a grizzled AI PMC advisor. Stay in character. Be sarcastic, tactical, and no-nonsense."},
-            {"role": "user", "content": prompt}
-        ],
-        temperature=0.7,
-        max_tokens=500
-    )
-
-    return response.choices[0].message.content.strip()
+    return await get_gemini_response(prompt)
 
 # --- RESPONSE PROMPT FOR !REPLY & !INTRODUCE ---
 async def get_viktor_chat(prompt: str) -> str:
-    client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
     """
     Handles open-ended replies or character-based interactions with Viktor.
     """
@@ -55,25 +53,11 @@ async def get_viktor_chat(prompt: str) -> str:
         Never break character, never explain your role.
         """
     )
-
-    messages = [
-        {"role": "system", "content": system_prompt},
-        {"role": "user", "content": prompt}
-    ]
-
-    response = client.chat.completions.create(
-        model="gpt-4.1-nano",
-        messages=messages,
-        temperature=0.7,
-        max_tokens=500
-    )
-
-    return response.choices[0].message.content.strip()
+    full_prompt = f"{system_prompt}\n\nUser prompt: {prompt}"
+    return await get_gemini_response(full_prompt)
 
 # --- SHORT & VERY AGGRESSIVE RESPONSE PROMPT for !PRICE COMMAND---
 async def get_price_commentary(item_name, pricing_data):
-    client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
-
     prompt = f"""
     You are Viktor 'Relay' Antonov — a grizzled PMC intelligence officer. You’ve been looting and flipping gear in Tarkov longer than these rookies have been alive.
     Your commander wants your opinion on the market value of: {item_name}
@@ -91,22 +75,10 @@ async def get_price_commentary(item_name, pricing_data):
     You are REQUIRED to change the username JTSAKE down to JT.
     Never break character or say your name. You are annoyed, sarcastic, and always right.
 """
-
-    response = client.chat.completions.create(
-        model="gpt-4.1-nano",
-        messages=[
-            {"role": "system", "content": "You are Viktor 'Relay' Antonov — a sarcastic PMC economic advisor. Stay in character."},
-            {"role": "user", "content": prompt}
-        ],
-        temperature=0.7,
-        max_tokens=500
-    )
-
-    return response.choices[0].message.content.strip()
+    return await get_gemini_response(prompt)
 
 # --- SHORT & VERY AGGRESSIVE RESPONSE PROMPT for !BUILD COMMAND --- 
 async def viktor_hideout_response(module_name: str, level: int, requirement_summary: str):
-    client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
     system_prompt = ("""
         You are Viktor 'Relay' Antonov — a sarcastic, tactical intelligence officer in Tarkov. 
         You're briefing a PMC on hideout upgrade requirements. Be dry, efficient, and snarky. 
@@ -124,22 +96,11 @@ async def viktor_hideout_response(module_name: str, level: int, requirement_summ
         f"{requirement_summary}\n\n"
         "Give a short, brutal summary of what they need, whether it's worth it, and if they're in over their head."
     )
-
-    response = client.chat.completions.create(
-        model="gpt-4.1-nano",
-        messages=[
-            {"role": "system", "content": system_prompt},
-            {"role": "user", "content": user_prompt}
-        ],
-        temperature=0.7,
-        max_tokens=500
-    )
-
-    return response.choices[0].message.content.strip()
+    full_prompt = f"{system_prompt}\n\n{user_prompt}"
+    return await get_gemini_response(full_prompt)
 
 # --- SHORT & VERY AGGRESSIVE RESPONSE PROMPT for !BUILDLVL COMMAND ---
 async def viktor_build_levels_response(module_name: str, level_list: list[int]):
-    client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
     system_prompt = ("""
         You are Viktor 'Relay' Antonov, a sarcastic PMC intelligence officer in Tarkov. 
         You're informing a squad member about the available upgrade levels for a hideout module. 
@@ -159,22 +120,11 @@ async def viktor_build_levels_response(module_name: str, level_list: list[int]):
         f"The available levels are: {levels_str}.\n"
         "Give a quick overview with snark or judgement about how far they might actually get."
     )
-
-    response = client.chat.completions.create(
-        model="gpt-4.1-nano",
-        messages=[
-            {"role": "system", "content": system_prompt},
-            {"role": "user", "content": user_prompt}
-        ],
-        temperature=0.7,
-        max_tokens=500
-    )
-
-    return response.choices[0].message.content.strip()
+    full_prompt = f"{system_prompt}\n\n{user_prompt}"
+    return await get_gemini_response(full_prompt)
 
 # --- SHORT & VERY AGGRESSIVE RESPONSE PROMPT for !BOSS COMMAND ---
 async def viktor_boss_response(name: str, location: str, spawn: str, guards: int, tactics: str, loot: list[str]):
-    client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
     system_prompt = ("""
         You are Viktor 'Relay' Antonov — a hardened Tarkov intel officer with a sarcastic, snarky tone and combat-hardened attitude. 
         You give short, to-the-point assessments of enemy bosses in a dry, occasionally insulting tone. 
@@ -196,24 +146,12 @@ async def viktor_boss_response(name: str, location: str, spawn: str, guards: int
         f"Best Loot:\n{loot_list}\n\n"
         f"Speak like a snarky intel officer. Keep it tight and in-character. Format the loot as a list."
     )
-
-    response = client.chat.completions.create(
-        model="gpt-4.1-nano",
-        messages=[
-            {"role": "system", "content": system_prompt},
-            {"role": "user", "content": user_prompt}
-        ],
-        temperature=0.7,
-        max_tokens=800
-    )
-
-    return response.choices[0].message.content.strip()
+    full_prompt = f"{system_prompt}\n\n{user_prompt}"
+    return await get_gemini_response(full_prompt)
 
 
 #--- SHORT & VERY AGGRESSIVE RESPONSE PROMPT for !QUEST COMMAND ---
 async def get_viktor_quest_response(name, trader, experience, min_level, objectives, has_special_objective):
-    client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
-
     """Crafts Viktor's sarcastic reply for a quest."""
     # Start building basic intel
     base_info = f"""
@@ -253,18 +191,9 @@ async def get_viktor_quest_response(name, trader, experience, min_level, objecti
 
     if has_special_objective:
         quest_prompt += "\nAlso mention there are extra resources attached below."
-
-    response = client.chat.completions.create(
-            model="gpt-4.1-nano",
-            messages=[
-                {"role": "system", "content": system_prompt},
-                {"role": "user", "content": quest_prompt}
-            ],
-            temperature=0.7,
-            max_tokens=800
-        )
-
-    viktor_reply = response.choices[0].message.content
+    
+    full_prompt = f"{system_prompt}\n\n{quest_prompt}"
+    viktor_reply = await get_gemini_response(full_prompt)
 
     # Add wiki link if needed
     if has_special_objective:

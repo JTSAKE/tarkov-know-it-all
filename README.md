@@ -1,6 +1,6 @@
 # Tarkov Know-It-All Bot — "Viktor 'Relay' Antonov"
 
-A Discord bot built for Escape From Tarkov players. Viktor is more than a bot — he's your squad's embedded PMC intel specialist. Tactical, sarcastic, and occasionally offensive (in Russian, with translations). This project combines real-time game data with OpenAI to deliver immersive, role-play-driven squad support.
+A Discord bot built for Escape From Tarkov players. Viktor is more than a bot — he's your squad's embedded PMC intel specialist. Tactical, sarcastic, and occasionally offensive (in Russian, with translations). This project combines real-time game data with Google Gemini to deliver immersive, role-play-driven squad support.
 
 ---
 
@@ -10,7 +10,7 @@ A Discord bot built for Escape From Tarkov players. Viktor is more than a bot �
 - Modular command system using Discord.py cogs
 - Structured error handling and logging (`logs/bot.log`)
 - Custom in-character `!help` command
-- GPT-powered character layer with OpenAI API integration
+- Gemini-powered character layer with Google Gemini API integration
 - Fuzzy matching for user input (boss names, calibers, items)
 - Dev mode tools (heartbeat loop, debug logging toggle)
 - `.env` support for secure API key and mode management
@@ -19,12 +19,12 @@ A Discord bot built for Escape From Tarkov players. Viktor is more than a bot �
 ---
 
 ### `!ammo <caliber>`
-Fetches real-time ammo data from the [Tarkov.dev](https://tarkov.dev) API and sends it through OpenAI's GPT model.
+Fetches real-time ammo data from the [Tarkov.dev](https://tarkov.dev) API and sends it through Google Gemini's model.
 
 - Returns top-performing ammo by penetration
 - Supports fuzzy aliases (e.g., `!ammo 9x19`)
 - Viktor gives a tactical, sarcastic ammo briefing
-- GPT-driven personality in full effect
+- Gemini-driven personality in full effect
 
 ---
 
@@ -36,11 +36,11 @@ Fetches real-time ammo data from the [Tarkov.dev](https://tarkov.dev) API and se
 ---
 
 ### `!price <item name>`
-Fetches flea market and trader prices from the [Tarkov.dev](https://tarkov.dev) API and sends it through OpenAI's GPT model.
+Fetches flea market and trader prices from the [Tarkov.dev](https://tarkov.dev) API and sends it through Google Gemini's model.
 
 - Uses fuzzy matching (`gpu` → `Graphics Card`)
 - Live pricing from Tarkov.dev (24h average, low, trader offers)
-- GPT formats the data into a short, snarky market analysis
+- Gemini formats the data into a short, snarky market analysis
 - Viktor tells you if it's “worth dying for” or “trader trash”
 
 ---
@@ -49,13 +49,13 @@ Fetches flea market and trader prices from the [Tarkov.dev](https://tarkov.dev) 
 Intel report on any boss in Tarkov, delivered by Viktor.
 - Fuzzy name matching (`tagilla`, `killa`, `shadow`, etc.)
 - Includes spawn location, spawn chance, guards, tactics, and loot
-- Viktor summarizes with a snarky personality via GPT
+- Viktor summarizes with a snarky personality via Gemini
 - Great for pre-raid planning or squad banter
 
 ---
 
 ###  `!build <module name>`
-Fetches build requiredments from the [Tarkov.dev](https://tarkov.dev) API and sends it through OpenAI's GPT model.
+Fetches build requiredments from the [Tarkov.dev](https://tarkov.dev) API and sends it through Google Gemini's model.
 - Returns all requirements to build or upgrade a hideout module.
 - Fuzzy-matches hideout station names (bitcoin, medstation, water, etc.)
 - Shows item counts, skill levels, and prerequisite modules for each level
@@ -65,7 +65,7 @@ Fetches build requiredments from the [Tarkov.dev](https://tarkov.dev) API and se
 ---
 
 ### `!buildlvl <module name>`
-Fetches build levels from the [Tarkov.dev](https://tarkov.dev) API and sends it through OpenAI's GPT model.
+Fetches build levels from the [Tarkov.dev](https://tarkov.dev) API and sends it through Google Gemini's model.
 - Lists all upgrade levels available for a given hideout module.
 - Fuzzy-matches hideout station names (lavatory, intel, med, etc.)
 - Displays available levels in a clean list (e.g., Lv1, Lv2, Lv3)
@@ -84,7 +84,7 @@ Have Viktor explain who (and what) he is.
 ---
 
 ### `!quest <quest name>`
-Fetches quest details from the [Tarkov.dev](https://tarkov.dev) API and sends it through OpenAI's GPT model.
+Fetches quest details from the [Tarkov.dev](https://tarkov.dev) API and sends it through Google Gemini's model.
 - Live quest data pulled from Tarkov.dev
 - Shows quest name, trader, XP reward, and objectives
 - Viktor summarizes with sarcasm, insults, and tactical advice
@@ -94,7 +94,7 @@ Fetches quest details from the [Tarkov.dev](https://tarkov.dev) API and sends it
 
 ### `!reply <message>`
 Chat directly with Vikor in real-timee.
-- GPT-powered banter with Viktor’s sarcastic tone
+- Gemini-powered banter with Viktor’s sarcastic tone
 - Responds with tactical wisdom and Russian-flavored insults
 - Great for roleplay, squad immersion, or laughs
 - Every message generates a unique, in-character reply
@@ -105,7 +105,7 @@ Chat directly with Vikor in real-timee.
 
 Viktor "Relay" Antonov is a grizzled, ex-military AI advisor.
 
-- Built using OpenAI’s `gpt-4.1-nano`
+- Built using Google Gemini's `gemini-2.0-flash-lite`
 - Responses shaped by system and user prompt engineering
 - Drops occasional Russian insults (with *English translations*)
 - Never breaks character. Ever.
@@ -123,7 +123,7 @@ Viktor "Relay" Antonov is a grizzled, ex-military AI advisor.
 - Python 3.10+
 - [discord.py](https://github.com/Rapptz/discord.py) — Bot framework
 - [requests](https://pypi.org/project/requests/) — For API calls to Tarkov.dev
-- [openai](https://pypi.org/project/openai/) SDK v1+ — For GPT-powered replies from Viktor
+- [google-generativeai](https://pypi.org/project/google-generativeai/) SDK — For Gemini-powered replies from Viktor
 - [dotenv](https://pypi.org/project/python-dotenv/) — Environment variable management
 - [difflib](https://docs.python.org/3/library/difflib.html) — For fuzzy matching boss names
 - [Tarkov.dev GraphQL API](https://tarkov.dev/api) — All live game data (ammo, flea market, hideout, etc.)
